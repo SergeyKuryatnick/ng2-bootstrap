@@ -1,16 +1,18 @@
-import { $, browser } from 'protractor';
+import { $, browser, protractor } from 'protractor';
 import { leftPanelTests } from './leftPanelTests.po';
 import { DataProvider } from '../data-provider/data-provider.po';
-import WebElement = webdriver.WebElement;
 
 let using = require('jasmine-data-provider');
-const buttonShowTooltip = $('.btn.btn-primary');
-const buttonHideTooltip = $('.btn.btn-danger');
-const tooltipElement = $('.tooltip-inner');
+const buttonShowTooltip = $('button:nth-of-type(1)');
+const buttonHideTooltip = $('button:nth-of-type(2)');
+const tooltipElement = $('tooltip-container');
 const tooltipDelayed = $('[tooltip="appears with delay"]');
 const tooltipHTML = $('.item>tooltip-demo>p:nth-child(4)>a');
 const tooltipTemplateRef = $('tooltip-demo>p:nth-child(5)>a');
 const tooltipDynamic = $('tooltip-demo>p:nth-child(3)>a:nth-child(1)');
+const tooltipUseCustomTriggers = $('[tooltip="See? Now click away..."]');
+const tooltipTrigeeredByCustomEvents = $('tooltip-demo>p:nth-of-type(6)>a');
+const tooltipCombineTriggerEvents = $('tooltip-demo>p:nth-of-type(7)>a');
 const inputDynamicTooltipText = $('tooltip-demo>div:nth-child(1) input');
 const inputDynamicPopupText = $('tooltip-demo>div:nth-child(2) input');
 const inputDisableTooltipConditionally = $('[tooltiptrigger="mouseenter"]');
@@ -41,26 +43,8 @@ describe('Tooltip page test on bootstrap 3', () => {
     buttonHideTooltip.click();
     expect(tooltipElement.isPresent()).toBe(false);
   });
-  it ('Check Delayed tooltip', () => {
-    browser.ignoreSynchronization=true;
-    browser.actions()
-      .mouseMove(tooltipDelayed as any)
-      .perform();
-    expect(tooltipElement.isPresent()).toBe(false);
-    browser.sleep(1010);
-    expect(tooltipElement.getText()).toBe('appears with delay');
-  });
-  it ('Check HTML tooltip', () => {
-    browser.ignoreSynchronization=true;
-    browser.actions()
-      .mouseMove(tooltipHTML as any)
-      .perform();
-    expect(tooltipElement.isPresent()).toBe(false);
-    browser.sleep(510);
-    expect(tooltipElement.getText()).toBe(`I've been made bold!`);
-  });
   using (DataProvider.inputDifferentData, (data:any, description:string) => {
-    it ('Check tooltip texts: ' + description, () => {
+    it ('Check diff texts for Dynamic tooltip: ' + description, () => {
       inputDynamicPopupText.clear();
       inputDynamicPopupText.sendKeys(data.inputText);
       browser.actions()
@@ -91,5 +75,44 @@ describe('Tooltip page test on bootstrap 3', () => {
       .perform();
     expect($('.tooltip-inner>h4').getText()).toBe('Tool tip custom content defined inside a template');
     expect($('.tooltip-inner>h5').getText()).toBe('With context binding: foo');
+  });
+  it('Check Custom trigger tooltip', () => {
+    tooltipUseCustomTriggers.click();
+    expect(tooltipElement.getText()).toBe('See? Now click away...');
+  });
+  it ('Check HTML tooltip', () => {
+    browser.actions()
+      .mouseMove(tooltipHTML as any)
+      .perform();
+    expect(tooltipElement.getText()).toBe(`I've been made bold!`);
+    browser.actions()
+      .mouseMove(inputDynamicTooltipText as any)
+      .perform();
+  });
+  it('Check triggered by custom events tooltip', () => {
+    browser.actions()
+      .mouseMove(tooltipTrigeeredByCustomEvents as any)
+      .perform();
+    expect(tooltipElement.isPresent()).toBe(false);
+    tooltipTrigeeredByCustomEvents.click();
+    expect(tooltipElement.getText()).toBe('I displayed after click event');
+  });
+  it('Check tooltip that combine trigger events', () => {
+    tooltipCombineTriggerEvents.click();
+    expect(tooltipElement.getText()).toBe('I displayed after click or focus event');
+    tooltipTrigeeredByCustomEvents.click();
+    tooltipTrigeeredByCustomEvents.sendKeys(protractor.Key.TAB);
+    expect(tooltipElement.getText()).toBe('I displayed after click or focus event');
+    tooltipTrigeeredByCustomEvents.click();
+  });
+  it ('Check Delayed tooltip', () => {
+    browser.actions()
+      .mouseMove(tooltipDelayed as any)
+      .perform();
+    browser.ignoreSynchronization=true;
+    browser.sleep(200);
+    expect(tooltipElement.isPresent()).toBe(false);
+    browser.sleep(1010);
+    expect(tooltipElement.getText()).toBe('appears with delay');
   });
 });

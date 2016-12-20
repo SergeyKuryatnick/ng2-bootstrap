@@ -7,7 +7,9 @@ const getTabHeaderAccordionPage = (tabNumber:number) => {
 const getTabContentAccordionPage = (tabNumber:number) => {
   return $('accordion-group:nth-child(' + tabNumber + ') .panel-body');
 };
-
+const getStarPosition = (starPosition:number) => {
+  return $('rating-demo>rating i:nth-of-type(' + starPosition + ')');
+};
 export class DataProvider {
 
   public static accordionTableContent: any = {
@@ -26,10 +28,10 @@ export class DataProvider {
   };
 
   public static alertTableContains:any = {
-    'Alert Danger text': {element: (): ElementFinder => $('[ng-reflect-type="danger"]>div'), actualResult: 'Oh snap! Change a few things up and try submitting again.'},
-    'Alert Success text': {element: (): ElementFinder => $('[ng-reflect-type="success"]>div:not(span):not(.close)'), actualResult: 'Well done! You successfully read this important alert message.'},
+    'Alert Danger text': {element: (): ElementFinder => $('alert:nth-of-type(1)'), actualResult: 'Oh snap! Change a few things up and try submitting again.'},
+    'Alert Success text': {element: (): ElementFinder => $('alert:nth-of-type(2)'), actualResult: 'Well done! You successfully read this important alert message.'},
     'Alert Dismissible text': {element: (): ElementFinder => $('[dismissontimeout="3000"]'), actualResult: 'This alert will dismiss in 3s'},
-    'Alert Another text': {element: (): ElementFinder => $('[ng-reflect-type="warning"]:nth-child(2n)'), actualResult: 'Another alert!'}
+    'Alert Another text': {element: (): ElementFinder => $('alert:nth-of-type(3)'), actualResult: 'Another alert!'}
   };
   public static modalsTableContains:any = {
     'Modal Large button text': {element: (): ElementFinder => $('.btn:nth-child(1)'), actualResult: 'Large modal'},
@@ -56,11 +58,13 @@ export class DataProvider {
   public static tooltipDefaultContains:any = {
     'Dynamic Tooltip header text': {element: (): ElementFinder => $('tooltip-demo>div:nth-child(1) label'), actualResult: 'Dynamic Tooltip Text'},
     'Dynamic Tooltip Popup header text': {element: (): ElementFinder => $('tooltip-demo>div:nth-child(2) label'), actualResult: 'Dynamic Tooltip Popup Text'},
-    'I can even contain HTML': {element: (): ElementFinder => $('tooltip-demo>p:nth-child(4)'), actualResult: 'I can even contain HTML. Check me out!'},
-    'Or use a TemplateRef': {element: (): ElementFinder => $('tooltip-demo>p:nth-child(5)'), actualResult: 'Or use a TemplateRef. Check me out!'},
-    'Programatically show/hide tooltip': {element: (): ElementFinder => $('tooltip-demo>p:nth-child(6)'), actualResult: 'Programatically show/hide tooltip Check me out! Show tooltip Hide tooltip'},
-    'I can have a custom class': {element: (): ElementFinder => $('tooltip-demo>p:nth-child(7)'), actualResult: 'I can have a custom class. Check me out!'},
-    'And if I am in overflow': {element: (): ElementFinder => $('tooltip-demo>p:nth-child(8)'), actualResult: 'And if I am in overflow: hidden container, then just tooltipAppendToBody me instead!'},
+    'I can even contain HTML': {element: (): ElementFinder => $('tooltip-demo>p:nth-of-type(2)'), actualResult: 'I can even contain HTML. Check me out!'},
+    'Or use a TemplateRef': {element: (): ElementFinder => $('tooltip-demo>p:nth-of-type(3)'), actualResult: 'Or use a TemplateRef. Check me out!'},
+    'Programatically show/hide tooltip': {element: (): ElementFinder => $('tooltip-demo>p:nth-of-type(4)'), actualResult: 'Programatically show/hide tooltip Check me out! Show tooltip Hide tooltip'},
+    'I can have a custom class': {element: (): ElementFinder => $('tooltip-demo>p:nth-of-type(5)'), actualResult: 'I can have a custom class. Check me out!'},
+    'I can triggered by': {element: (): ElementFinder => $('tooltip-demo>p:nth-of-type(6)'), actualResult: 'I can triggered by the custom events. For example, by the click. Check me out'},
+    'I can combine trigger events.': {element: (): ElementFinder => $('tooltip-demo>p:nth-of-type(7)'), actualResult: 'I can combine trigger events. Now I can be displayed by the "click" and "focus" events. Click or tab me.'},
+    'And if I am in overflow': {element: (): ElementFinder => $('tooltip-demo>p:nth-of-type(8)'), actualResult: 'And if I am in overflow: hidden container, then just tooltipAppendToBody me instead!'},
     'Button Show tooltip text': {element: (): ElementFinder => $('.btn.btn-primary'), actualResult: 'Show tooltip'},
     'Button Hide tooltip text': {element: (): ElementFinder => $('.btn.btn-danger'), actualResult: 'Hide tooltip'},
     'Or use custom triggers, like focus header text': {element: (): ElementFinder => $('[role="form"]>.form-group:nth-child(1) label'), actualResult: 'Or use custom triggers, like focus:'},
@@ -72,12 +76,11 @@ export class DataProvider {
     'Right Tooltip': {element: (): ElementFinder => $('[tooltip="On the Right!"]'), actualResult: 'On the Right!'},
     'Bottom Tooltip': {element: (): ElementFinder => $('[tooltip="On the Bottom!"]'), actualResult: 'On the Bottom!'},
     'Fading Tooltip': {element: (): ElementFinder => $(`[tooltip="I don't fade. :-("]`), actualResult: `I don't fade. :-(`},
-    'Show/hide Tooltip': {element: (): ElementFinder => $('tooltip-demo>p:nth-child(6)>a'), actualResult: 'Foo'},
-    'Custom class Tooltip': {element: (): ElementFinder => $('tooltip-demo>p:nth-child(7)>a'), actualResult: 'I can have a custom class applied to me!'},
-    'Overflow:hidden Tooltip': {element: (): ElementFinder => $('[tooltip="That ruins the tooltip"]'), actualResult: 'That ruins the tooltip'},
-    'Overflow:toBody Tooltip': {element: (): ElementFinder => $('[tooltip="So the tooltip is visible always correctly"]'), actualResult: 'So the tooltip is visible always correctly'},
-    'Custom triggers Tooltip': {element: (): ElementFinder => $('[tooltip="See? Now click away..."]'), actualResult: 'See? Now click away...'},
-    'Disable Tooltip': {element: (): ElementFinder => $('[tooltip="Enter something in this input field to disable this tooltip"]'), actualResult: 'Enter something in this input field to disable this tooltip'}
+    'Show/hide Tooltip': {element: (): ElementFinder => $('tooltip-demo>p:nth-of-type(4)>a'), actualResult: 'Foo'},
+    'Custom class Tooltip': {element: (): ElementFinder => $('tooltip-demo>p:nth-of-type(5)>a'), actualResult: 'I can have a custom class applied to me!'},
+    'Overflow:hidden Tooltip': {element: (): ElementFinder => $('tooltip-demo>p:nth-of-type(8)>a:nth-child(1)'), actualResult: 'That ruins the tooltip'},
+    'Overflow:toBody Tooltip': {element: (): ElementFinder => $('tooltip-demo>p:nth-of-type(8)>a:nth-of-type(2)'), actualResult: 'So the tooltip is visible always correctly'},
+    'Disable Tooltip': {element: (): ElementFinder => $('form [tooltiptrigger="mouseenter"]'), actualResult: 'Enter something in this input field to disable this tooltip'}
   };
   public static inputDifferentData:any = {
     'Text normal': { inputText: 'First or second'},
@@ -109,6 +112,18 @@ export class DataProvider {
     Texas: { inputText: 'xa', expectedResult: 'Texas'},
     Florida: { inputText: 'rida', expectedResult: 'Florida'},
     Mississippi: { inputText: 'ssi', expectedResult: 'Mississippi'},
-    'New Jersey': { inputText: 'J', expectedResult: 'New Jersey'}
+    New_Jersey: { inputText: 'J', expectedResult: 'New Jersey'}
+  };
+  public static ratingStarsBarTextValues:any = {
+    '1st Star': {element: (): ElementFinder => getStarPosition(1), percentInfo: '10%', hoveringText: '1'},
+    '2nd Star': {element: (): ElementFinder => getStarPosition(2), percentInfo: '20%', hoveringText: '2'},
+    '3rd Star': {element: (): ElementFinder => getStarPosition(3), percentInfo: '30%', hoveringText: '3'},
+    '4th Star': {element: (): ElementFinder => getStarPosition(4), percentInfo: '40%', hoveringText: '4'},
+    '5th Star': {element: (): ElementFinder => getStarPosition(5), percentInfo: '50%', hoveringText: '5'},
+    '6th Star': {element: (): ElementFinder => getStarPosition(6), percentInfo: '60%', hoveringText: '6'},
+    '7th Star': {element: (): ElementFinder => getStarPosition(7), percentInfo: '70%', hoveringText: '7'},
+    '8th Star': {element: (): ElementFinder => getStarPosition(8), percentInfo: '80%', hoveringText: '8'},
+    '9th tStar': {element: (): ElementFinder => getStarPosition(9), percentInfo: '90%', hoveringText: '9'},
+    '10th Star': {element: (): ElementFinder => getStarPosition(10), percentInfo: '100%', hoveringText: '10'}
   };
 }

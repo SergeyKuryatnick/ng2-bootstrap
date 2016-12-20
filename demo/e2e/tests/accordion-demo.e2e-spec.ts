@@ -35,9 +35,11 @@ describe('Check the Accordion page in bootstrap 3', () => {
     buttonToggleLastPanel.click();
     expect(getTabContent(5).isDisplayed()).toBe(true);
     expect(buttonArrow.getAttribute('class')).toContain('glyphicon-chevron-down');
+    expect(buttonArrow.isDisplayed()).toBe(true);
     buttonToggleLastPanel.click();
     expect(getTabContent(5).isDisplayed()).toBe(false);
     expect(buttonArrow.getAttribute('class')).toContain('glyphicon-chevron-right');
+    expect(buttonArrow.isDisplayed()).toBe(true);
   });
   it('Button Enable/Disable first panel is ON', () => {
     buttonEnableDisablePanel.click();

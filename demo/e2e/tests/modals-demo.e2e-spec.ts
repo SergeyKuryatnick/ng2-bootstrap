@@ -15,8 +15,9 @@ let using = require('jasmine-data-provider');
 describe('Modals page test on bootstrap 3', () => {
   beforeAll(() => {
     browser.get('#/modals');
-    leftPanelTests.checkLeftPanelMini();
-    leftPanelTests.checkLeftPanelMaxi();
+    browser.ignoreSynchronization=false;
+    // leftPanelTests.checkLeftPanelMini();
+    // leftPanelTests.checkLeftPanelMaxi();
   });
   using (DataProvider.modalsTableContains, (data:any, description:string) => {
     it ('Check table texts: ' + description, () => {
@@ -27,11 +28,13 @@ describe('Modals page test on bootstrap 3', () => {
     buttonLargeModal.click();
     expect(modalTitle.getText()).toBe('Large modal');
     expect(modalBody.getText()).toBe('...');
+    browser.switchTo().defaultContent();
     browser.actions()
-      .mouseMove({ x: 1000, y: 0 })
+      .mouseMove({x: 10, y: 0})
       .click()
       .perform();
-    expect(modalWindow.isPresent()).toBe(false);
+    expect(modalWindow.isPresent()).toBeFalsy();
+
   });
   it('Small modal open and close by x-cross', () => {
     buttonSmallModal.click();

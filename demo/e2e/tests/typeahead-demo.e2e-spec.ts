@@ -29,6 +29,7 @@ function clearInputFields():any {
 describe('Typeahead page tests on bootstrap 3', () => {
   beforeAll(() => {
     browser.get('#/typeahead');
+    browser.ignoreSynchronization=false;
     leftPanelTests.checkLeftPanelMini();
     leftPanelTests.checkLeftPanelMaxi();
   });

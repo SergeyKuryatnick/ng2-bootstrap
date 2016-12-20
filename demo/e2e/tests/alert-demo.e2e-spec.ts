@@ -8,7 +8,7 @@ const alertWarning = $('[ng-reflect-ng-class="alert-warning"]');
 const getAlertCount = $$('alert > div');
 
 const getCloseButton = (tabNumber:number) => {
-  return 'alert-demo alert:nth-child(' + tabNumber + ') .close';
+  return $('alert-demo alert:nth-child(' + tabNumber + ') .close');
 };
 
 describe('Alerts page test on bootstrap 3', () => {
@@ -38,14 +38,14 @@ describe('Alerts page test on bootstrap 3', () => {
     expect(alertWarning.isPresent()).toBe(false);
   });
   it('User can delete danger and success alerts', () => {
-    $(getCloseButton(3)).click();
-    $(getCloseButton(2)).click();
-    $(getCloseButton(1)).click();
+    getCloseButton(3).click();
+    getCloseButton(2).click();
+    getCloseButton(1).click();
     expect(getAlertCount.count()).toBe(1);
   });
   it('User can delete added alerts', () => {
     buttonAddAlert.click();
-    $(getCloseButton(1)).click();
+    getCloseButton(1).click();
     expect(getAlertCount.count()).toBe(1);
   });
 });

@@ -33,10 +33,10 @@ describe('Buttons page test on bootstrap 3', () => {
     expect(buttonSingleToggle.getAttribute('class')).toBe('btn btn-primary ng-untouched ng-pristine ng-valid active');
     buttonSingleToggle.click();
     expect(panelSingleToggle.getText()).toBe('0');
-    expect(buttonSingleToggle.getAttribute('class')).toContain('btn btn-primary ng-untouched ng-pristine ng-valid');
+    expect(buttonSingleToggle.getAttribute('class')).toBe('btn btn-primary ng-untouched ng-valid ng-dirty');
     buttonSingleToggle.click();
     expect(panelSingleToggle.getText()).toBe('1');
-    expect(buttonSingleToggle.getAttribute('class')).toContain('btn btn-primary ng-untouched ng-pristine ng-valid active');
+    expect(buttonSingleToggle.getAttribute('class')).toContain('active');
   });
   it('Checkbox. Defaults states for checkbox buttons', () => {
     expect(checkboxModelFieldOne.getText()).toContain('"left": false');
@@ -60,7 +60,7 @@ describe('Buttons page test on bootstrap 3', () => {
     expect(checkboxModelFieldTwo.getText()).toContain('Middle: false');
     expect(checkboxModelFieldTwo.getText()).toContain('Right: true');
     expect($(pressCheckboxButton(1)).getAttribute('class')).toContain('active');
-    expect($(pressCheckboxButton(2)).getAttribute('class')).toBe('btn btn-primary ng-untouched ng-pristine ng-valid');
+    expect($(pressCheckboxButton(2)).getAttribute('class')).toBe('btn btn-primary ng-untouched ng-valid ng-dirty');
     expect($(pressCheckboxButton(3)).getAttribute('class')).toContain('active');
   });
   it('Radio. Check defaults states for radio buttons', () => {
