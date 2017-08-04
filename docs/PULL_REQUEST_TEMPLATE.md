@@ -5,5 +5,5 @@
 **UAT steps:** 
 <User Acceptance Testing steps how to check your changes>
 
-**Additional information:** 
+**Additional information:**
 <information for QA, needed accounts, etc>
