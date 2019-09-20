@@ -1,6 +1,6 @@
 <a href="http://valor-software.com/ngx-bootstrap/#/">
-sdasdasdasdasdasd    <h1 align="center">ngx-bootstrap</h1>
-</a>
+sdasdasdasdasdasdasdasdasdasd    <h1 align="center">ngx-bootstrap</h1>
+sadasdsadas</a>
 
 <p align="center">
 Best way to quickly integrate <a href="https://getbootstrap.com/">Bootstrap 3</a> or <a href="https://getbootstrap.com/docs/4.0">Bootstrap 4</a> Components with <a href="https://angular.io/">Angular</a>
