@@ -19,7 +19,7 @@ Native Angular2 directives for Bootstrap, works with Bootstrap 3 and 4-alfa
 
 # Getting Started
 
-ng2-bootstrap contains all core (and not only) Bootstrap components powered by Angular 2. So you don't need to include original JS components, but we are using markup and css provided by Bootstrap.
+ngx-bootstrap contains all core (and not only) Bootstrap components powered by Angular 2. So you don't need to include original JS components, but we are using markup and css provided by Bootstrap.
     
 Additionally to allow reach experience while working with Dates we are using [moment.js](http://momentjs.com/), de facto base date manipulation library at the moment.
 
